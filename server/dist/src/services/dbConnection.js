@@ -12,10 +12,24 @@ const client = new pg.Client({
     password: 'User@1234',
     database: 'cmstock',
 });
-(async () => {
-    await client
+// ;(async () => {
+//   await client
+//     .connect()
+//     .then(() => console.log('db connected'))
+//     .catch((err) => console.log(err))
+// })()
+export const connectpg = async () => {
+    // return new Promise<void>((resolve, reject) => {
+    client
         .connect()
-        .then(() => console.log('db connected'))
-        .catch((err) => console.log(err));
-})();
+        .then(() => {
+        console.log('Database connection successful');
+        // resolve()
+    })
+        .catch((error) => {
+        console.error('Database connection error', error);
+        // reject(error)
+    });
+    // })
+};
 export const db = drizzle(client);
